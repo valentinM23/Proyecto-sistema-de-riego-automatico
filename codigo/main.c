@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "pico/stdlib.h"
 #include "hardware/adc.h"
 #include "hardware/pwm.h"
@@ -33,16 +32,15 @@ int main() {
     // Configurar el ADC para leer el sensor de humedad
     adc_init();
     adc_gpio_init(PIN_SENSOR_HUMEDAD);
-	adc_select_input(0);
 
     // Configurar el PWM
     configurar_pwm();
 
     while (1) {
         // Leer el valor del sensor de humedad
-        uint16_t valor_adc = adc_read();
+        uint16_t valor_adc = adc_read(PIN_SENSOR_HUMEDAD);
         // Puedes ajustar estos valores según las especificaciones de tu sensor
-        int valor_humedad = (valor_adc * -100) / 4095 +100;
+        int valor_humedad = (valor_adc * +100) / 4095 -100;
 
         printf("Valor de humedad: %d\n", valor_humedad);
 
@@ -55,5 +53,5 @@ int main() {
         sleep_ms(10000); // Esperar 10 segundos antes de la próxima lectura (ajusta según tus necesidades)
     }
 
-    return 0;
+    return 0;
 }
