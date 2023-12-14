@@ -1,1 +1,1 @@
-Sistema de Riego Por Goteo
+Sistema de Riego Automatico
